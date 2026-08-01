@@ -1,6 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
-import { BRAND } from "@/lib/brand";
+import { BRAND, PRIMARY_KEYWORDS } from "@/lib/brand";
+import Analytics from "@/components/Analytics";
+import JsonLd from "@/components/JsonLd";
+import { localBusinessSchema, websiteSchema } from "@/lib/schema";
+import { absoluteUrl } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -15,28 +19,81 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  themeColor: "#14532d",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(BRAND.siteUrl),
-  title: `${BRAND.name} | ${BRAND.locationShort}`,
-  description: `Complete landscaping care for your entire property in ${BRAND.location}. Reliable, thorough, and done right — twice a month or every 10 days. Call ${BRAND.phoneDisplay}.`,
+  title: {
+    default: "Landscaping Cliffwood NJ | JLuca Landscaping",
+    template: "%s | JLuca Landscaping",
+  },
+  description:
+    "Local landscaping & lawn care in Cliffwood, NJ. Bi-weekly plans from $75. Mowing, beds, edges & clean-up. Call (732) 597-6659.",
   keywords: [
-    "landscaping",
-    "Cliffwood NJ",
-    "lawn care",
+    ...PRIMARY_KEYWORDS,
+    "lawn mowing Cliffwood",
     "JLuca Landscaping",
-    "J Luca Landscaping",
-    "property maintenance",
+    "Aberdeen landscaping",
+    "Matawan lawn care",
   ],
+  authors: [{ name: BRAND.name, url: BRAND.siteUrl }],
+  creator: BRAND.name,
+  publisher: BRAND.name,
+  applicationName: BRAND.name,
+  category: "Landscaping",
   icons: {
     icon: BRAND.logoMarkPath,
     apple: BRAND.logoMarkPath,
   },
+  manifest: "/site.webmanifest",
+  alternates: {
+    canonical: absoluteUrl("/"),
+  },
   openGraph: {
-    title: `${BRAND.name} | ${BRAND.locationShort}`,
-    description: `${BRAND.tagline} Complete landscaping care for Cliffwood & surrounding areas.`,
     type: "website",
     locale: "en_US",
-    images: [{ url: BRAND.logoPath }],
+    url: BRAND.siteUrl,
+    siteName: BRAND.name,
+    title: "Landscaping Cliffwood NJ | JLuca Landscaping",
+    description:
+      "Your Property. Our Pride. Complete lawn care & landscaping for Cliffwood and Monmouth County.",
+    images: [
+      {
+        url: absoluteUrl(BRAND.ogImagePath),
+        alt: "JLuca Landscaping — Cliffwood, NJ",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Landscaping Cliffwood NJ | JLuca Landscaping",
+    description:
+      "Bi-weekly lawn care & full property landscaping in Cliffwood, NJ. Call (732) 597-6659.",
+    images: [absoluteUrl(BRAND.ogImagePath)],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  verification: process.env.NEXT_PUBLIC_GSC_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION }
+    : undefined,
+  other: {
+    "geo.region": "US-NJ",
+    "geo.placename": "Cliffwood",
+    "geo.position": `${BRAND.geo.latitude};${BRAND.geo.longitude}`,
+    ICBM: `${BRAND.geo.latitude}, ${BRAND.geo.longitude}`,
   },
 };
 
@@ -47,7 +104,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="min-h-screen antialiased">{children}</body>
+      <body className="min-h-screen antialiased">
+        <JsonLd data={[localBusinessSchema(), websiteSchema()]} />
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

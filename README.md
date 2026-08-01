@@ -78,6 +78,32 @@ cp .env.example .env.local
 npm run dev
 ```
 
+## SEO
+
+| Resource | URL |
+| --- | --- |
+| **Sitemap** | https://jlucalandscaping.com/sitemap.xml |
+| **Robots** | https://jlucalandscaping.com/robots.txt |
+| **Health** | https://jlucalandscaping.com/api/health |
+
+### Key landing pages
+- `/` — Home (landscaping Cliffwood NJ)
+- `/lawn-care-cliffwood-nj`
+- `/landscaping-monmouth-county`
+- `/service-areas`
+- `/services` + individual service URLs
+- `/faq`
+- `/blog` — resources (add more posts over time)
+
+### Local SEO
+- NAP in footer + schema (LocalBusiness JSON-LD)
+- FAQ + Service schema
+- Submit sitemap in [Google Search Console](https://search.google.com/search-console)
+
+### Analytics
+Set `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXX` in Vercel. Form submits fire `generate_lead`.
+
 ## License
 
 Private project for JLuca Landscaping.
+

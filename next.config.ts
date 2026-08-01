@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
     : {}),
   images: {
     unoptimized: isGithubPages,
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         protocol: "https",
@@ -20,6 +21,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Prefer trailing-slash off for clean canonical URLs
+  trailingSlash: false,
+  poweredByHeader: false,
+  compress: true,
 };
 
 export default nextConfig;

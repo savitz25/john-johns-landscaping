@@ -60,8 +60,8 @@ export default function Pricing() {
             Choose Your Plan
           </h2>
           <p className="mt-4 text-white/75">
-            Transparent monthly rates. No surprises — just great-looking
-            property care.
+            Transparent monthly rates for Cliffwood &amp; Monmouth County lawn
+            care. No surprises — just great-looking property care.
           </p>
         </div>
 

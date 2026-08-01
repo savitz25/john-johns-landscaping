@@ -46,6 +46,14 @@ export default function Contact() {
 
       form.reset();
       setStatus("sent");
+      // GA4 conversion event (if gtag is loaded)
+      if (typeof window !== "undefined" && typeof window.gtag === "function") {
+        window.gtag("event", "generate_lead", {
+          event_category: "contact",
+          event_label: payload.plan,
+          value: 1,
+        });
+      }
       setTimeout(() => setStatus("idle"), 8000);
     } catch (err) {
       setStatus("error");

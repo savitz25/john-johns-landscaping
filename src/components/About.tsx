@@ -52,7 +52,7 @@ export default function About() {
                 "url(https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=900&q=80)",
             }}
             role="img"
-            aria-label="Professionally landscaped residential property"
+            aria-label="Professionally landscaped residential property in New Jersey"
           />
           <div className="absolute bottom-6 left-6 flex items-center gap-3 rounded-xl border border-white/80 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-md">
             {/* eslint-disable-next-line @next/next/no-img-element */}
