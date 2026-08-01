@@ -15,7 +15,9 @@ export async function GET() {
   );
   const emailFrom =
     process.env.EMAIL_FROM || `${BRAND.name} <${BRAND.email}>`;
-  const forwardTo = process.env.EMAIL_FORWARD_TO || "savitz25@gmail.com";
+  const forwardTo =
+    process.env.EMAIL_FORWARD_TO ||
+    "savitz25@gmail.com,dadrice6@gmail.com";
   const siteUrl = (process.env.SITE_URL || BRAND.siteUrl).replace(/\/$/, "");
 
   return NextResponse.json({

@@ -28,8 +28,22 @@ function getResendApiKey(): string {
   );
 }
 
+/** Comma-separated list of lead inbox addresses. */
+function parseRecipients(raw: string): string[] {
+  return raw
+    .split(/[,;\s]+/)
+    .map((s) => s.trim())
+    .filter((s) => EMAIL_RE.test(s));
+}
+
 function getConfig() {
   const siteUrl = env("SITE_URL", BRAND.siteUrl).replace(/\/$/, "");
+  const forwardTo = parseRecipients(
+    env(
+      "EMAIL_FORWARD_TO",
+      "savitz25@gmail.com,dadrice6@gmail.com",
+    ),
+  );
   return {
     apiKey: getResendApiKey(),
     // Verified domain sender (jlucalandscaping.com in Resend)
@@ -37,7 +51,12 @@ function getConfig() {
       "EMAIL_FROM",
       `${BRAND.name} <${BRAND.email}>`,
     ),
-    forwardTo: env("EMAIL_FORWARD_TO", "savitz25@gmail.com"),
+    forwardTo:
+      forwardTo.length > 0
+        ? forwardTo
+        : ["savitz25@gmail.com", "dadrice6@gmail.com"],
+    // Reply-to for customer confirmation (first business inbox)
+    businessReplyTo: forwardTo[0] || "savitz25@gmail.com",
     siteUrl,
     logoUrl: `${siteUrl}${BRAND.logoEmailPath}`,
   };
@@ -165,7 +184,7 @@ export async function POST(request: Request) {
       cfg.logoUrl,
     );
 
-    // 1) Forward lead to business inbox (reply goes to customer)
+    // 1) Forward lead to all business inboxes (reply goes to customer)
     const ownerResult = await sendResendEmail({
       from: cfg.from,
       to: cfg.forwardTo,
@@ -175,14 +194,14 @@ export async function POST(request: Request) {
       text: ownerMail.text,
     });
 
-    // 2) Branded confirmation to customer (reply goes to business)
+    // 2) Branded confirmation to customer (reply goes to primary business inbox)
     let customerId: string | undefined;
     let customerError: string | undefined;
     try {
       const customerResult = await sendResendEmail({
         from: cfg.from,
         to: data.email,
-        replyTo: cfg.forwardTo,
+        replyTo: cfg.businessReplyTo,
         subject: customerMail.subject,
         html: customerMail.html,
         text: customerMail.text,
