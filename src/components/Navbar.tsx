@@ -35,7 +35,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 h-[72px] transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 h-20 transition-all duration-300 ${
         scrolled
           ? "bg-white/92 shadow-sm backdrop-blur-md"
           : "bg-transparent"
@@ -44,7 +44,7 @@ export default function Navbar() {
       <div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between px-5">
         <a
           href="#hero"
-          className="relative z-50 flex items-center"
+          className="relative z-50 flex items-center py-1"
           onClick={close}
           aria-label={BRAND.name}
         >
@@ -52,13 +52,13 @@ export default function Navbar() {
           <img
             src={BRAND.logoPath}
             alt={BRAND.name}
-            className={`h-[52px] w-auto object-contain transition ${
+            className={`h-[68px] w-auto object-contain transition sm:h-[72px] ${
               logoOnDark
-                ? "drop-shadow-[0_1px_8px_rgba(255,255,255,0.55)]"
+                ? "drop-shadow-[0_1px_10px_rgba(255,255,255,0.5)]"
                 : ""
             }`}
-            width={40}
-            height={52}
+            width={64}
+            height={72}
           />
         </a>
 
@@ -131,9 +131,9 @@ export default function Navbar() {
           <img
             src={BRAND.logoPath}
             alt=""
-            className="mb-1 h-24 w-auto object-contain drop-shadow-[0_2px_12px_rgba(255,255,255,0.35)]"
-            width={72}
-            height={96}
+            className="mb-1 h-28 w-auto object-contain drop-shadow-[0_2px_14px_rgba(255,255,255,0.35)]"
+            width={100}
+            height={112}
             aria-hidden="true"
           />
           {links.map((link) => (

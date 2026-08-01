@@ -4,16 +4,16 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-forest-950 py-8 text-white/70">
+    <footer className="bg-forest-950 py-10 text-white/70">
       <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-6 px-5 sm:flex-row">
         <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={BRAND.logoPath}
             alt={BRAND.name}
-            className="h-16 w-auto object-contain drop-shadow-[0_1px_10px_rgba(255,255,255,0.28)]"
-            width={48}
-            height={64}
+            className="h-20 w-auto object-contain drop-shadow-[0_1px_12px_rgba(255,255,255,0.28)] sm:h-24"
+            width={72}
+            height={96}
           />
           <div className="text-center sm:text-left">
             <strong className="block font-serif text-[0.95rem] text-white">

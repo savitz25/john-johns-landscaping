@@ -22,10 +22,10 @@ function escapeHtml(s: string): string {
 function brandHeader(siteUrl: string, logoUrl: string): string {
   return `
     <tr>
-      <td style="background-color:#ffffff;padding:32px 32px 18px;text-align:center;border-bottom:3px solid #16a34a;">
-        <a href="${escapeHtml(siteUrl)}" style="text-decoration:none;display:inline-block;line-height:0;">
-          <!-- Transparent PNG — design only, no background plate -->
-          <img src="${escapeHtml(logoUrl)}" alt="JLuca Landscaping" width="160" height="210" style="display:block;margin:0 auto;width:160px;max-width:42vw;height:auto;border:0;outline:none;text-decoration:none;" />
+      <td style="background-color:#f7faf7;padding:36px 32px 22px;text-align:center;border-bottom:3px solid #16a34a;">
+        <a href="${escapeHtml(siteUrl)}" style="text-decoration:none;display:inline-block;line-height:0;background:transparent;">
+          <!-- Transparent PNG — plant + JL + wordmark only (no white circle) -->
+          <img src="${escapeHtml(logoUrl)}" alt="JLuca Landscaping" width="200" height="225" style="display:block;margin:0 auto;width:200px;max-width:55vw;height:auto;border:0;outline:none;text-decoration:none;background:transparent;" />
         </a>
       </td>
     </tr>

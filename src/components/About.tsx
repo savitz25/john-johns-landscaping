@@ -59,9 +59,9 @@ export default function About() {
             <img
               src={BRAND.logoPath}
               alt=""
-              className="h-12 w-auto object-contain"
-              width={36}
-              height={48}
+              className="h-14 w-auto object-contain sm:h-16"
+              width={48}
+              height={64}
               aria-hidden="true"
             />
             <span>

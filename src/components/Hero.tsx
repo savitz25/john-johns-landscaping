@@ -1,3 +1,5 @@
+import { BRAND } from "@/lib/brand";
+
 export default function Hero() {
   return (
     <section
@@ -15,7 +17,15 @@ export default function Hero() {
       />
       <div className="absolute inset-0 bg-linear-to-br from-forest-950/85 via-forest-900/70 to-forest-950/80" />
 
-      <div className="animate-fade-up relative z-10 w-full max-w-3xl px-5 pt-[72px]">
+      <div className="animate-fade-up relative z-10 w-full max-w-3xl px-5 pt-24">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={BRAND.logoPath}
+          alt={BRAND.name}
+          className="mx-auto mb-6 h-28 w-auto object-contain drop-shadow-[0_2px_16px_rgba(255,255,255,0.35)] sm:h-36 md:h-40"
+          width={140}
+          height={160}
+        />
         <span className="inline-flex items-center rounded-full border border-white/25 bg-white/15 px-3.5 py-1.5 text-sm font-semibold text-white backdrop-blur-sm">
           Serving Cliffwood &amp; Surrounding Areas
         </span>
