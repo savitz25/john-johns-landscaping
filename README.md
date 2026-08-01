@@ -12,7 +12,7 @@ Built with **Next.js 16**, **React 19**, **TypeScript**, and **Tailwind CSS v4**
 | **Phone** | (732) 597-6659 |
 | **Email** | hello@jlucalandscaping.com |
 | **Location** | Cliffwood, NJ |
-| **Logo** | `public/logo.png` (dark), `public/logo-light.jpg` / `logo-email.jpg` (light) |
+| **Logo** | `public/logo.png` + `public/logo-email.png` (transparent, design only) |
 
 Brand constants live in `src/lib/brand.ts`.
 
