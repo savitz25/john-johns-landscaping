@@ -18,7 +18,7 @@ function CheckIcon() {
 const plans = [
   {
     name: "Standard Care",
-    price: 150,
+    price: 75,
     featured: true,
     features: [
       "Twice monthly visits",
@@ -29,7 +29,7 @@ const plans = [
   },
   {
     name: "Premium Care",
-    price: 185,
+    price: 100,
     featured: false,
     features: [
       "Service every 10 days",

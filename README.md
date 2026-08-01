@@ -8,7 +8,7 @@ Built with **Next.js 16**, **React 19**, **TypeScript**, and **Tailwind CSS v4**
 
 - Fixed navigation with glass effect on scroll + mobile menu
 - Full-viewport hero with landscaping photography
-- Services, dual pricing cards ($150 / $185), about, and contact form
+- Services, dual pricing cards ($75 / $100), about, and contact form
 - Forest green design system, Playfair Display + Inter
 - Fully responsive, accessible labels, SEO metadata
 - Contact form via Resend: branded customer confirmation + lead email to owner

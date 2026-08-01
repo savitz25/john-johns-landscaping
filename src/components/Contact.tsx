@@ -233,9 +233,9 @@ export default function Contact() {
                     Select a package
                   </option>
                   <option value="Standard Care">
-                    Standard Care — $150/mo
+                    Standard Care — $75/mo
                   </option>
-                  <option value="Premium Care">Premium Care — $185/mo</option>
+                  <option value="Premium Care">Premium Care — $100/mo</option>
                   <option value="Not sure yet">
                     Not sure yet — help me decide
                   </option>
