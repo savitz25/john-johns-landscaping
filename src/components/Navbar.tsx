@@ -11,15 +11,7 @@ const links = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -29,16 +21,9 @@ export default function Navbar() {
   }, [open]);
 
   const close = () => setOpen(false);
-  const logoOnDark = !scrolled && !open;
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 h-[4.5rem] transition-all duration-300 ${
-        scrolled
-          ? "bg-white/94 shadow-sm backdrop-blur-md"
-          : "bg-transparent"
-      }`}
-    >
+    <header className="fixed inset-x-0 top-0 z-50 h-[4.5rem] border-b border-forest-100/80 bg-white shadow-sm">
       <div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between px-5">
         <a
           href="#hero"
@@ -50,11 +35,7 @@ export default function Navbar() {
           <img
             src={BRAND.logoNavPath}
             alt={BRAND.name}
-            className={`h-14 w-auto object-contain object-left transition sm:h-[3.75rem] ${
-              logoOnDark
-                ? "drop-shadow-[0_1px_8px_rgba(255,255,255,0.45)]"
-                : ""
-            }`}
+            className="h-14 w-auto object-contain object-left sm:h-[3.75rem]"
             width={80}
             height={60}
           />
@@ -65,11 +46,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className={`relative text-sm font-medium transition-colors after:absolute after:bottom-[-4px] after:left-0 after:h-0.5 after:w-0 after:bg-forest-500 after:transition-all hover:after:w-full ${
-                scrolled
-                  ? "text-forest-900 hover:text-forest-700"
-                  : "text-white/90 hover:text-white"
-              }`}
+              className="relative text-sm font-medium text-forest-900 transition-colors after:absolute after:bottom-[-4px] after:left-0 after:h-0.5 after:w-0 after:bg-forest-500 after:transition-all hover:text-forest-700 hover:after:w-full"
             >
               {link.label}
             </a>
@@ -90,30 +67,18 @@ export default function Navbar() {
           onClick={() => setOpen((v) => !v)}
         >
           <span
-            className={`block h-0.5 w-[22px] rounded transition-all ${
-              open
-                ? "translate-y-[7px] rotate-45 bg-white"
-                : scrolled
-                  ? "bg-forest-900"
-                  : "bg-white"
+            className={`block h-0.5 w-[22px] rounded bg-forest-900 transition-all ${
+              open ? "translate-y-[7px] rotate-45" : ""
             }`}
           />
           <span
-            className={`block h-0.5 w-[22px] rounded transition-all ${
-              open
-                ? "opacity-0"
-                : scrolled
-                  ? "bg-forest-900"
-                  : "bg-white"
+            className={`block h-0.5 w-[22px] rounded bg-forest-900 transition-all ${
+              open ? "opacity-0" : ""
             }`}
           />
           <span
-            className={`block h-0.5 w-[22px] rounded transition-all ${
-              open
-                ? "-translate-y-[7px] -rotate-45 bg-white"
-                : scrolled
-                  ? "bg-forest-900"
-                  : "bg-white"
+            className={`block h-0.5 w-[22px] rounded bg-forest-900 transition-all ${
+              open ? "-translate-y-[7px] -rotate-45" : ""
             }`}
           />
         </button>
