@@ -29,36 +29,34 @@ export default function Navbar() {
   }, [open]);
 
   const close = () => setOpen(false);
-
-  // Soft lift so dark green wordmark stays readable on the dark hero only
   const logoOnDark = !scrolled && !open;
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 h-20 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 h-[4.5rem] transition-all duration-300 ${
         scrolled
-          ? "bg-white/92 shadow-sm backdrop-blur-md"
+          ? "bg-white/94 shadow-sm backdrop-blur-md"
           : "bg-transparent"
       }`}
     >
       <div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between px-5">
         <a
           href="#hero"
-          className="relative z-50 flex items-center py-1"
+          className="relative z-50 flex shrink-0 items-center"
           onClick={close}
           aria-label={BRAND.name}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={BRAND.logoPath}
+            src={BRAND.logoNavPath}
             alt={BRAND.name}
-            className={`h-[68px] w-auto object-contain transition sm:h-[72px] ${
+            className={`h-14 w-auto object-contain object-left transition sm:h-[3.75rem] ${
               logoOnDark
-                ? "drop-shadow-[0_1px_10px_rgba(255,255,255,0.5)]"
+                ? "drop-shadow-[0_1px_8px_rgba(255,255,255,0.45)]"
                 : ""
             }`}
-            width={64}
-            height={72}
+            width={80}
+            height={60}
           />
         </a>
 
@@ -131,9 +129,9 @@ export default function Navbar() {
           <img
             src={BRAND.logoPath}
             alt=""
-            className="mb-1 h-28 w-auto object-contain drop-shadow-[0_2px_14px_rgba(255,255,255,0.35)]"
-            width={100}
-            height={112}
+            className="mb-2 h-24 w-auto object-contain drop-shadow-[0_2px_14px_rgba(255,255,255,0.3)]"
+            width={110}
+            height={96}
             aria-hidden="true"
           />
           {links.map((link) => (

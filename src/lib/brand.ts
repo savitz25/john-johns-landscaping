@@ -11,10 +11,12 @@ export const BRAND = {
   email: "hello@jlucalandscaping.com",
   siteUrl: "https://john-johns-landscaping.vercel.app",
   /**
-   * Transparent logo assets (no white circle / fill).
+   * Transparent stacked logo (mark + wordmark, tight lockup).
+   * logo-nav is a crisp 2x asset sized for the header.
    * Query string busts CDN/browser cache after logo swaps.
    */
-  logoPath: "/logo.png?v=3",
-  logoEmailPath: "/logo-email.png?v=3",
-  logoMarkPath: "/logo-mark.png?v=3",
+  logoPath: "/logo.png?v=4",
+  logoNavPath: "/logo-nav.png?v=4",
+  logoEmailPath: "/logo-email.png?v=4",
+  logoMarkPath: "/logo-mark.png?v=4",
 } as const;

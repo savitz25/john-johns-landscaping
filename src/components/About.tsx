@@ -57,11 +57,11 @@ export default function About() {
           <div className="absolute bottom-6 left-6 flex items-center gap-3 rounded-xl border border-white/80 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-md">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={BRAND.logoPath}
+              src={BRAND.logoMarkPath}
               alt=""
-              className="h-14 w-auto object-contain sm:h-16"
-              width={48}
-              height={64}
+              className="h-11 w-11 object-contain"
+              width={44}
+              height={44}
               aria-hidden="true"
             />
             <span>

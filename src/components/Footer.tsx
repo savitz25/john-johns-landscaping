@@ -5,25 +5,25 @@ export default function Footer() {
 
   return (
     <footer className="bg-forest-950 py-10 text-white/70">
-      <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-6 px-5 sm:flex-row">
-        <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
+      <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-8 px-5 sm:flex-row sm:gap-6">
+        <a
+          href="#hero"
+          className="flex flex-col items-center gap-2 sm:flex-row sm:items-center sm:gap-4"
+          aria-label={BRAND.name}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={BRAND.logoPath}
             alt={BRAND.name}
-            className="h-20 w-auto object-contain drop-shadow-[0_1px_12px_rgba(255,255,255,0.28)] sm:h-24"
-            width={72}
-            height={96}
+            className="h-[4.5rem] w-auto object-contain drop-shadow-[0_1px_10px_rgba(255,255,255,0.25)] sm:h-20"
+            width={90}
+            height={80}
           />
-          <div className="text-center sm:text-left">
-            <strong className="block font-serif text-[0.95rem] text-white">
-              {BRAND.name}
-            </strong>
-            <span className="text-sm text-white/55">
-              Simple. Reliable. Local.
-            </span>
-          </div>
-        </div>
+          <span className="text-center text-sm text-white/50 sm:text-left">
+            Simple. Reliable. Local.
+          </span>
+        </a>
+
         <div className="text-center text-sm sm:text-right">
           <p>
             <a
@@ -40,7 +40,7 @@ export default function Footer() {
               {BRAND.email}
             </a>
           </p>
-          <p className="mt-1">
+          <p className="mt-1 text-white/45">
             &copy; {year} {BRAND.name}. {BRAND.locationShort}.
           </p>
         </div>

@@ -22,15 +22,15 @@ function escapeHtml(s: string): string {
 function brandHeader(siteUrl: string, logoUrl: string): string {
   return `
     <tr>
-      <td style="background-color:#f7faf7;padding:36px 32px 22px;text-align:center;border-bottom:3px solid #16a34a;">
+      <td style="background-color:#ffffff;padding:32px 28px 20px;text-align:center;border-bottom:3px solid #16a34a;">
         <a href="${escapeHtml(siteUrl)}" style="text-decoration:none;display:inline-block;line-height:0;background:transparent;">
-          <!-- Transparent PNG — plant + JL + wordmark only (no white circle) -->
-          <img src="${escapeHtml(logoUrl)}" alt="JLuca Landscaping" width="200" height="225" style="display:block;margin:0 auto;width:200px;max-width:55vw;height:auto;border:0;outline:none;text-decoration:none;background:transparent;" />
+          <!-- Tight lockup: mark + wordmark, transparent, no circle fill -->
+          <img src="${escapeHtml(logoUrl)}" alt="JLuca Landscaping" width="168" height="128" style="display:block;margin:0 auto;width:168px;max-width:48vw;height:auto;border:0;outline:none;text-decoration:none;background:transparent;" />
         </a>
       </td>
     </tr>
     <tr>
-      <td style="background-color:#14532d;padding:12px 32px;text-align:center;">
+      <td style="background-color:#14532d;padding:11px 32px;text-align:center;">
         <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:600;color:#86efac;letter-spacing:2.5px;text-transform:uppercase;">
           Your Property · Our Pride · Cliffwood, NJ
         </p>
