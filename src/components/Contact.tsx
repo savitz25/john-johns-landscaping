@@ -2,23 +2,58 @@
 
 import { FormEvent, useState } from "react";
 
-export default function Contact() {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+type Status = "idle" | "sending" | "sent" | "error";
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+export default function Contact() {
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
+
+    const fd = new FormData(form);
+    const payload = {
+      name: String(fd.get("name") || "").trim(),
+      phone: String(fd.get("phone") || "").trim(),
+      email: String(fd.get("email") || "").trim(),
+      plan: String(fd.get("plan") || "").trim(),
+      message: String(fd.get("message") || "").trim(),
+    };
+
     setStatus("sending");
-    // Demo handler — wire to Formspree, Resend, or your API when ready
-    setTimeout(() => {
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+      };
+
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+
       form.reset();
       setStatus("sent");
-      setTimeout(() => setStatus("idle"), 5000);
-    }, 600);
+      setTimeout(() => setStatus("idle"), 8000);
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again.",
+      );
+    }
   };
 
   return (
@@ -36,7 +71,8 @@ export default function Contact() {
               </h2>
               <p className="mt-4 mb-10 leading-relaxed text-white/80">
                 Tell us about your yard. We’ll follow up promptly with next
-                steps and availability.
+                steps and availability — you’ll also get a confirmation email
+                right away.
               </p>
 
               <ul className="mt-auto flex flex-col gap-6">
@@ -231,8 +267,21 @@ export default function Contact() {
               </button>
 
               {status === "sent" && (
-                <p className="rounded-[10px] border border-forest-100 bg-forest-50 px-3 py-3 text-center font-semibold text-forest-700">
-                  Thank you! We’ll be in touch shortly.
+                <p
+                  role="status"
+                  className="rounded-[10px] border border-forest-100 bg-forest-50 px-3 py-3 text-center font-semibold text-forest-700"
+                >
+                  Thank you! Check your inbox for a confirmation — we’ll be in
+                  touch shortly.
+                </p>
+              )}
+
+              {status === "error" && (
+                <p
+                  role="alert"
+                  className="rounded-[10px] border border-red-200 bg-red-50 px-3 py-3 text-center font-semibold text-red-700"
+                >
+                  {errorMsg || "Something went wrong. Please try again."}
                 </p>
               )}
             </form>

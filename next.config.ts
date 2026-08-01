@@ -3,9 +3,16 @@ import type { NextConfig } from "next";
 const isGithubPages = process.env.GITHUB_PAGES === "true";
 
 const nextConfig: NextConfig = {
-  output: "export",
+  // Static export only for GitHub Pages. Vercel keeps Node runtime for /api.
+  ...(isGithubPages
+    ? {
+        output: "export" as const,
+        basePath: "/john-johns-landscaping",
+        assetPrefix: "/john-johns-landscaping",
+      }
+    : {}),
   images: {
-    unoptimized: true,
+    unoptimized: isGithubPages,
     remotePatterns: [
       {
         protocol: "https",
@@ -13,13 +20,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // GitHub Pages project site: https://savitz25.github.io/john-johns-landscaping/
-  ...(isGithubPages
-    ? {
-        basePath: "/john-johns-landscaping",
-        assetPrefix: "/john-johns-landscaping",
-      }
-    : {}),
 };
 
 export default nextConfig;
