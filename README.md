@@ -1,8 +1,20 @@
-# John Johns Landscaping
+# JLuca Landscaping
 
-Polished production single-page website for **John Johns Landscaping** (Cliffwood, NJ).
+Polished production single-page website for **JLuca Landscaping** (Cliffwood, NJ).
 
 Built with **Next.js 16**, **React 19**, **TypeScript**, and **Tailwind CSS v4**.
+
+## Brand
+
+| | |
+| --- | --- |
+| **Company** | JLuca Landscaping |
+| **Phone** | (732) 597-6659 |
+| **Email** | hello@jlucalandscaping.com |
+| **Location** | Cliffwood, NJ |
+| **Logo** | `public/logo.png` (dark), `public/logo-light.jpg` / `logo-email.jpg` (light) |
+
+Brand constants live in `src/lib/brand.ts`.
 
 ## Features
 
@@ -40,27 +52,23 @@ npm run build
 npm start
 ```
 
-For static hosting, you can also export if you add `output: 'export'` to `next.config.ts`.
-
 ## Contact form & email (Resend)
 
 Form submissions hit `POST /api/contact`, which:
 
 1. **Forwards the lead** to `EMAIL_FORWARD_TO` (default `savitz25@gmail.com`) with reply-to set to the customer
-2. **Sends a branded confirmation** to the customer (logo, plan summary, thank-you)
+2. **Sends a branded confirmation** to the customer (JLuca logo, plan summary, thank-you)
 
 ### Vercel environment variables
-
-Set these in the Vercel project (**Settings → Environment Variables**):
 
 | Variable | Example | Notes |
 | --- | --- | --- |
 | `RESEND_API_KEY` | `re_…` | From [Resend API Keys](https://resend.com/api-keys) |
-| `EMAIL_FROM` | `John Johns Landscaping <onboarding@resend.dev>` | Use a **verified domain** sender in production |
+| `EMAIL_FROM` | `JLuca Landscaping <hello@jlucalandscaping.com>` | Verify **jlucalandscaping.com** in Resend |
 | `EMAIL_FORWARD_TO` | `savitz25@gmail.com` | Owner inbox for new leads |
 | `SITE_URL` | `https://john-johns-landscaping.vercel.app` | Logo + links in emails |
 
-> **Resend note:** With `onboarding@resend.dev` you can only send *to* the Resend account email. To confirm arbitrary customers and deliver to Gmail, verify a domain in Resend and set `EMAIL_FROM` to an address on that domain.
+> **Resend note:** With `onboarding@resend.dev` you can only send *to* the Resend account email. Verify `jlucalandscaping.com` and set `EMAIL_FROM` to `hello@jlucalandscaping.com` for production.
 
 ### Local testing
 
@@ -70,14 +78,6 @@ cp .env.example .env.local
 npm run dev
 ```
 
-## Contact placeholders
-
-Update before launch in `src/components/Contact.tsx`:
-
-- Phone: `(732) 555-0100`
-- Email: `hello@johnjohnslandscaping.com`
-
 ## License
 
-Private project for John Johns Landscaping.
-
+Private project for JLuca Landscaping.

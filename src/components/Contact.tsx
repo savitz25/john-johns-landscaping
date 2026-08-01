@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { BRAND } from "@/lib/brand";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -117,10 +118,10 @@ export default function Contact() {
                       Phone
                     </strong>
                     <a
-                      href="tel:+17325550100"
+                      href={`tel:${BRAND.phoneTel}`}
                       className="transition hover:text-forest-100 hover:underline"
                     >
-                      (732) 555-0100
+                      {BRAND.phoneDisplay}
                     </a>
                   </div>
                 </li>
@@ -144,10 +145,10 @@ export default function Contact() {
                       Email
                     </strong>
                     <a
-                      href="mailto:hello@johnjohnslandscaping.com"
+                      href={`mailto:${BRAND.email}`}
                       className="transition hover:text-forest-100 hover:underline"
                     >
-                      hello@johnjohnslandscaping.com
+                      {BRAND.email}
                     </a>
                   </div>
                 </li>
@@ -192,7 +193,7 @@ export default function Contact() {
                     type="tel"
                     required
                     autoComplete="tel"
-                    placeholder="(732) 555-0100"
+                    placeholder={BRAND.phoneDisplay}
                     className="rounded-[10px] border-[1.5px] border-gray-200 bg-off-white px-4 py-3 outline-none transition focus:border-forest-600 focus:bg-white focus:ring-4 focus:ring-forest-600/15"
                   />
                 </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { BRAND } from "@/lib/brand";
 
 const links = [
   { href: "#services", label: "Services" },
@@ -8,33 +9,6 @@ const links = [
   { href: "#about", label: "About" },
   { href: "#contact", label: "Contact" },
 ];
-
-function LeafIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width="32"
-      height="32"
-      viewBox="0 0 32 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <path
-        d="M16 4C16 4 8 10 8 18C8 22.4183 11.5817 26 16 26C20.4183 26 24 22.4183 24 18C24 10 16 4 16 4Z"
-        fill="currentColor"
-        opacity="0.9"
-      />
-      <path
-        d="M16 26V14"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        opacity="0.5"
-      />
-    </svg>
-  );
-}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -70,10 +44,17 @@ export default function Navbar() {
           className="relative z-50 flex items-center gap-2.5"
           onClick={close}
         >
-          <LeafIcon
-            className={
-              scrolled || open ? "text-forest-700" : "text-forest-500"
-            }
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={BRAND.logoLightPath}
+            alt={BRAND.name}
+            className={`h-12 w-auto rounded-full object-cover shadow-sm ring-1 transition ${
+              scrolled || open
+                ? "ring-forest-100"
+                : "ring-white/30"
+            }`}
+            width={48}
+            height={48}
           />
           <span className="flex flex-col leading-tight">
             <span
@@ -81,7 +62,7 @@ export default function Navbar() {
                 scrolled || open ? "text-forest-900" : "text-white"
               }`}
             >
-              John Johns
+              {BRAND.shortName}
             </span>
             <span
               className={`text-[0.7rem] font-medium tracking-wider uppercase transition-colors ${
@@ -160,6 +141,15 @@ export default function Navbar() {
               : "invisible opacity-0 pointer-events-none"
           }`}
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={BRAND.logoLightPath}
+            alt=""
+            className="mb-2 h-16 w-16 rounded-full object-cover ring-2 ring-forest-600/40"
+            width={64}
+            height={64}
+            aria-hidden="true"
+          />
           {links.map((link) => (
             <a
               key={link.href}

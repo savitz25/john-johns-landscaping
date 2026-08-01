@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { BRAND } from "@/lib/brand";
 import {
   customerConfirmationEmail,
   ownerNotificationEmail,
@@ -17,16 +18,13 @@ function env(name: string, fallback = ""): string {
 function getConfig() {
   return {
     apiKey: env("RESEND_API_KEY"),
-    // Prefer a verified domain sender. Resend onboarding address works for testing.
+    // Prefer verified domain: JLuca Landscaping <hello@jlucalandscaping.com>
     from: env(
       "EMAIL_FROM",
-      "John Johns Landscaping <onboarding@resend.dev>",
+      `${BRAND.name} <onboarding@resend.dev>`,
     ),
     forwardTo: env("EMAIL_FORWARD_TO", "savitz25@gmail.com"),
-    siteUrl: env("SITE_URL", "https://john-johns-landscaping.vercel.app").replace(
-      /\/$/,
-      "",
-    ),
+    siteUrl: env("SITE_URL", BRAND.siteUrl).replace(/\/$/, ""),
   };
 }
 
@@ -124,8 +122,8 @@ export async function POST(request: Request) {
     }
 
     const cfg = getConfig();
-    // PNG/JPG is more reliable than SVG across email clients (e.g. Gmail).
-    const logoUrl = `${cfg.siteUrl}/logo-email.jpg`;
+    // JPG is more reliable than SVG across email clients (e.g. Gmail).
+    const logoUrl = `${cfg.siteUrl}${BRAND.logoEmailPath}`;
 
     const ownerMail = ownerNotificationEmail(data, cfg.siteUrl, logoUrl);
     const customerMail = customerConfirmationEmail(data, cfg.siteUrl, logoUrl);

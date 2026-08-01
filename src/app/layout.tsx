@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import { BRAND } from "@/lib/brand";
 import "./globals.css";
 
 const inter = Inter({
@@ -15,22 +16,27 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "John Johns Landscaping | Cliffwood, NJ",
-  description:
-    "Complete landscaping care for your entire property in Cliffwood, New Jersey. Reliable, thorough, and done right — twice a month or every 10 days.",
+  metadataBase: new URL(BRAND.siteUrl),
+  title: `${BRAND.name} | ${BRAND.locationShort}`,
+  description: `Complete landscaping care for your entire property in ${BRAND.location}. Reliable, thorough, and done right — twice a month or every 10 days. Call ${BRAND.phoneDisplay}.`,
   keywords: [
     "landscaping",
     "Cliffwood NJ",
     "lawn care",
-    "John Johns Landscaping",
+    "JLuca Landscaping",
+    "J Luca Landscaping",
     "property maintenance",
   ],
+  icons: {
+    icon: BRAND.logoLightPath,
+    apple: BRAND.logoLightPath,
+  },
   openGraph: {
-    title: "John Johns Landscaping | Cliffwood, NJ",
-    description:
-      "Your Property. Our Pride. Complete landscaping care for Cliffwood & surrounding areas.",
+    title: `${BRAND.name} | ${BRAND.locationShort}`,
+    description: `${BRAND.tagline} Complete landscaping care for Cliffwood & surrounding areas.`,
     type: "website",
     locale: "en_US",
+    images: [{ url: BRAND.logoPath }],
   },
 };
 

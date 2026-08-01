@@ -1,3 +1,5 @@
+import { BRAND } from "@/lib/brand";
+
 export default function About() {
   return (
     <section id="about" className="bg-white py-24">
@@ -12,9 +14,9 @@ export default function About() {
             Lasting Results.
           </h2>
           <p className="mt-5 text-[1.05rem] leading-relaxed text-muted">
-            John Johns Landscaping is proudly based in{" "}
+            {BRAND.name} is proudly based in{" "}
             <strong className="font-semibold text-forest-800">
-              Cliffwood, New Jersey
+              {BRAND.location}
             </strong>
             . We’re a local team focused on one thing: keeping your property
             looking its best, visit after visit.
@@ -27,7 +29,7 @@ export default function About() {
           </p>
           <ul className="mt-6 flex flex-col gap-3">
             {[
-              "Based in Cliffwood, serving surrounding areas",
+              `Based in Cliffwood, serving surrounding areas`,
               "Complete property care, not just mowing",
               "Fixed schedules you can count on",
             ].map((item) => (
@@ -53,12 +55,18 @@ export default function About() {
             aria-label="Professionally landscaped residential property"
           />
           <div className="absolute bottom-6 left-6 flex items-center gap-3 rounded-xl border border-white/80 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-md">
-            <span className="text-2xl" aria-hidden="true">
-              📍
-            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={BRAND.logoLightPath}
+              alt=""
+              className="h-10 w-10 rounded-full object-cover"
+              width={40}
+              height={40}
+              aria-hidden="true"
+            />
             <span>
               <strong className="block text-[0.95rem] text-forest-900">
-                Cliffwood, NJ
+                {BRAND.locationShort}
               </strong>
               <small className="text-sm text-muted">Proudly local</small>
             </span>

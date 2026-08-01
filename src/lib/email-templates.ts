@@ -1,5 +1,5 @@
 /**
- * Branded HTML email templates for John Johns Landscaping.
+ * Branded HTML email templates for JLuca Landscaping.
  * Table-based layout for broad email client support.
  */
 
@@ -24,7 +24,7 @@ function brandHeader(siteUrl: string, logoUrl: string): string {
     <tr>
       <td style="background-color:#ffffff;padding:28px 32px 20px;text-align:center;border-bottom:3px solid #16a34a;">
         <a href="${escapeHtml(siteUrl)}" style="text-decoration:none;display:inline-block;">
-          <img src="${escapeHtml(logoUrl)}" alt="John Johns Landscaping" width="280" style="display:block;margin:0 auto;max-width:280px;width:100%;height:auto;border:0;" />
+          <img src="${escapeHtml(logoUrl)}" alt="JLuca Landscaping" width="280" style="display:block;margin:0 auto;max-width:280px;width:100%;height:auto;border:0;" />
         </a>
       </td>
     </tr>
@@ -44,15 +44,17 @@ function brandFooter(siteUrl: string): string {
     <tr>
       <td style="background-color:#052e16;padding:24px 32px;text-align:center;">
         <p style="margin:0 0 8px;font-family:Georgia,'Times New Roman',serif;font-size:15px;color:#ffffff;">
-          John Johns Landscaping
+          JLuca Landscaping
         </p>
         <p style="margin:0 0 12px;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#86efac;line-height:1.5;">
           Cliffwood, New Jersey<br />
-          Simple. Reliable. Local.
+          <a href="tel:+17325976659" style="color:#86efac;text-decoration:none;">(732) 597-6659</a>
+          &nbsp;·&nbsp;
+          <a href="mailto:hello@jlucalandscaping.com" style="color:#86efac;text-decoration:none;">hello@jlucalandscaping.com</a>
         </p>
         <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6b8f7a;">
           <a href="${escapeHtml(siteUrl)}" style="color:#86efac;text-decoration:underline;">Visit our website</a>
-          &nbsp;·&nbsp; &copy; ${year} John Johns Landscaping
+          &nbsp;·&nbsp; &copy; ${year} JLuca Landscaping
         </p>
       </td>
     </tr>
@@ -66,7 +68,7 @@ function shell(inner: string, siteUrl: string, logoUrl: string, preheader: strin
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light" />
-  <title>John Johns Landscaping</title>
+  <title>JLuca Landscaping</title>
   <!--[if mso]>
   <noscript>
     <xml>
@@ -103,7 +105,7 @@ export function customerConfirmationEmail(
   logoUrl: string,
 ): { subject: string; html: string; text: string } {
   const firstName = data.name.split(/\s+/)[0] || data.name;
-  const subject = "We received your request — John Johns Landscaping";
+  const subject = "We received your request — JLuca Landscaping";
   const preheader = `Thanks ${firstName}! We'll be in touch soon about your landscaping care.`;
 
   const messageBlock = data.message
@@ -171,7 +173,7 @@ export function customerConfirmationEmail(
       <td style="padding:8px 32px 32px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#3d4a42;text-align:center;">
         In the meantime, feel free to reply to this email with any extra details about your property — lawn size, problem spots, or preferred schedule.
         <br /><br />
-        <strong style="color:#14532d;">— The John Johns Landscaping Team</strong>
+        <strong style="color:#14532d;">— The JLuca Landscaping Team</strong>
       </td>
     </tr>
   `;
@@ -186,7 +188,7 @@ export function customerConfirmationEmail(
     `Email: ${data.email}`,
     data.message ? `\nMessage:\n${data.message}` : "",
     "",
-    "John Johns Landscaping · Cliffwood, NJ",
+    "JLuca Landscaping · Cliffwood, NJ",
     siteUrl,
   ]
     .filter(Boolean)
@@ -264,7 +266,7 @@ export function ownerNotificationEmail(
   `;
 
   const text = [
-    "NEW WEBSITE LEAD — John Johns Landscaping",
+    "NEW WEBSITE LEAD — JLuca Landscaping",
     "",
     `Name: ${data.name}`,
     `Phone: ${data.phone}`,
