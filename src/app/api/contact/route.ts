@@ -15,16 +15,31 @@ function env(name: string, fallback = ""): string {
   return v == null || v === "" ? fallback : v;
 }
 
+/**
+ * Resolve Resend API key from common env names.
+ * Vercel Resend integration injects RESEND_API_KEY.
+ */
+function getResendApiKey(): string {
+  return (
+    env("RESEND_API_KEY") ||
+    env("RESEND_KEY") ||
+    env("RESEND_TOKEN") ||
+    ""
+  );
+}
+
 function getConfig() {
+  const siteUrl = env("SITE_URL", BRAND.siteUrl).replace(/\/$/, "");
   return {
-    apiKey: env("RESEND_API_KEY"),
-    // Prefer verified domain: JLuca Landscaping <hello@jlucalandscaping.com>
+    apiKey: getResendApiKey(),
+    // Verified domain sender (jlucalandscaping.com in Resend)
     from: env(
       "EMAIL_FROM",
-      `${BRAND.name} <onboarding@resend.dev>`,
+      `${BRAND.name} <${BRAND.email}>`,
     ),
     forwardTo: env("EMAIL_FORWARD_TO", "savitz25@gmail.com"),
-    siteUrl: env("SITE_URL", BRAND.siteUrl).replace(/\/$/, ""),
+    siteUrl,
+    logoUrl: `${siteUrl}${BRAND.logoEmailPath}`,
   };
 }
 
@@ -66,13 +81,20 @@ async function sendResendEmail(opts: {
   const body = (await res.json().catch(() => ({}))) as {
     id?: string;
     message?: string;
-    error?: string;
+    name?: string;
+    error?: string | { message?: string };
   };
 
   if (!res.ok) {
-    const err = new Error(
-      body.message || body.error || `Resend error ${res.status}`,
-    ) as Error & { status?: number; body?: unknown };
+    const detail =
+      (typeof body.error === "object" && body.error?.message) ||
+      body.message ||
+      (typeof body.error === "string" ? body.error : null) ||
+      `Resend error ${res.status}`;
+    const err = new Error(detail) as Error & {
+      status?: number;
+      body?: unknown;
+    };
     err.status = res.status;
     err.body = body;
     throw err;
@@ -122,13 +144,28 @@ export async function POST(request: Request) {
     }
 
     const cfg = getConfig();
-    // JPG is more reliable than SVG across email clients (e.g. Gmail).
-    const logoUrl = `${cfg.siteUrl}${BRAND.logoEmailPath}`;
+    if (!cfg.apiKey) {
+      console.error(
+        "[api/contact] Missing RESEND_API_KEY in environment variables",
+      );
+      return NextResponse.json(
+        {
+          ok: false,
+          error:
+            "Email service is not configured yet. Add RESEND_API_KEY in Vercel project settings.",
+        },
+        { status: 503 },
+      );
+    }
 
-    const ownerMail = ownerNotificationEmail(data, cfg.siteUrl, logoUrl);
-    const customerMail = customerConfirmationEmail(data, cfg.siteUrl, logoUrl);
+    const ownerMail = ownerNotificationEmail(data, cfg.siteUrl, cfg.logoUrl);
+    const customerMail = customerConfirmationEmail(
+      data,
+      cfg.siteUrl,
+      cfg.logoUrl,
+    );
 
-    // Owner lead email is required; customer confirmation is best-effort.
+    // 1) Forward lead to business inbox (reply goes to customer)
     const ownerResult = await sendResendEmail({
       from: cfg.from,
       to: cfg.forwardTo,
@@ -138,6 +175,7 @@ export async function POST(request: Request) {
       text: ownerMail.text,
     });
 
+    // 2) Branded confirmation to customer (reply goes to business)
     let customerId: string | undefined;
     let customerError: string | undefined;
     try {
@@ -151,10 +189,10 @@ export async function POST(request: Request) {
       });
       customerId = customerResult.id;
     } catch (err) {
-      // Common when domain isn't verified: Resend only allows sending to the account email.
       customerError =
         err instanceof Error ? err.message : "Customer confirmation failed";
-      console.warn("[api/contact] customer confirmation skipped:", customerError);
+      console.warn("[api/contact] customer confirmation failed:", customerError);
+      // Lead was still delivered — succeed for the form UX, flag confirmation.
     }
 
     return NextResponse.json({
@@ -162,6 +200,7 @@ export async function POST(request: Request) {
       id: ownerResult.id,
       customerId,
       customerConfirmation: !customerError,
+      ...(customerError ? { customerWarning: customerError } : {}),
     });
   } catch (err) {
     console.error("[api/contact]", err);
@@ -181,10 +220,10 @@ export async function POST(request: Request) {
         ok: false,
         error:
           code === "NO_API_KEY"
-            ? "Email service is not configured yet."
+            ? "Email service is not configured yet. Add RESEND_API_KEY in Vercel project settings."
             : message,
       },
-      { status: code === "NO_API_KEY" ? 500 : status || 500 },
+      { status: code === "NO_API_KEY" ? 503 : status || 500 },
     );
   }
 }

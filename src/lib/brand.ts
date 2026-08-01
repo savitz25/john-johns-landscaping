@@ -9,7 +9,8 @@ export const BRAND = {
   phoneDisplay: "(732) 597-6659",
   phoneTel: "+17325976659",
   email: "hello@jlucalandscaping.com",
-  siteUrl: "https://john-johns-landscaping.vercel.app",
+  /** Canonical public site (custom domain) */
+  siteUrl: "https://jlucalandscaping.com",
   /**
    * Transparent stacked logo (mark + wordmark, tight lockup).
    * logo-nav is a crisp 2x asset sized for the header.
@@ -17,6 +18,6 @@ export const BRAND = {
    */
   logoPath: "/logo.png?v=4",
   logoNavPath: "/logo-nav.png?v=4",
-  logoEmailPath: "/logo-email.png?v=4",
+  logoEmailPath: "/logo-email.png",
   logoMarkPath: "/logo-mark.png?v=4",
 } as const;
