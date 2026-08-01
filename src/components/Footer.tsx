@@ -6,14 +6,14 @@ export default function Footer() {
   return (
     <footer className="bg-forest-950 py-8 text-white/70">
       <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-6 px-5 sm:flex-row">
-        <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-3">
+        <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={BRAND.logoLightPath}
+            src={BRAND.logoPath}
             alt={BRAND.name}
-            className="h-12 w-12 rounded-full object-cover ring-1 ring-white/15"
+            className="h-16 w-auto object-contain drop-shadow-[0_1px_10px_rgba(255,255,255,0.28)]"
             width={48}
-            height={48}
+            height={64}
           />
           <div className="text-center sm:text-left">
             <strong className="block font-serif text-[0.95rem] text-white">

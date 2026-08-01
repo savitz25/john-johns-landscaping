@@ -30,6 +30,9 @@ export default function Navbar() {
 
   const close = () => setOpen(false);
 
+  // Soft lift so dark green wordmark stays readable on the dark hero only
+  const logoOnDark = !scrolled && !open;
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 h-[72px] transition-all duration-300 ${
@@ -41,39 +44,22 @@ export default function Navbar() {
       <div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between px-5">
         <a
           href="#hero"
-          className="relative z-50 flex items-center gap-2.5"
+          className="relative z-50 flex items-center"
           onClick={close}
+          aria-label={BRAND.name}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={BRAND.logoLightPath}
+            src={BRAND.logoPath}
             alt={BRAND.name}
-            className={`h-12 w-auto rounded-full object-cover shadow-sm ring-1 transition ${
-              scrolled || open
-                ? "ring-forest-100"
-                : "ring-white/30"
+            className={`h-[52px] w-auto object-contain transition ${
+              logoOnDark
+                ? "drop-shadow-[0_1px_8px_rgba(255,255,255,0.55)]"
+                : ""
             }`}
-            width={48}
-            height={48}
+            width={40}
+            height={52}
           />
-          <span className="flex flex-col leading-tight">
-            <span
-              className={`font-serif text-lg font-semibold transition-colors ${
-                scrolled || open ? "text-forest-900" : "text-white"
-              }`}
-            >
-              {BRAND.shortName}
-            </span>
-            <span
-              className={`text-[0.7rem] font-medium tracking-wider uppercase transition-colors ${
-                scrolled || open
-                  ? "text-forest-700"
-                  : "text-white/75"
-              }`}
-            >
-              Landscaping
-            </span>
-          </span>
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -143,11 +129,11 @@ export default function Navbar() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={BRAND.logoLightPath}
+            src={BRAND.logoPath}
             alt=""
-            className="mb-2 h-16 w-16 rounded-full object-cover ring-2 ring-forest-600/40"
-            width={64}
-            height={64}
+            className="mb-1 h-24 w-auto object-contain drop-shadow-[0_2px_12px_rgba(255,255,255,0.35)]"
+            width={72}
+            height={96}
             aria-hidden="true"
           />
           {links.map((link) => (

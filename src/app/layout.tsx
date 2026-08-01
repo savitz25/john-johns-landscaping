@@ -28,8 +28,8 @@ export const metadata: Metadata = {
     "property maintenance",
   ],
   icons: {
-    icon: BRAND.logoLightPath,
-    apple: BRAND.logoLightPath,
+    icon: BRAND.logoPath,
+    apple: BRAND.logoPath,
   },
   openGraph: {
     title: `${BRAND.name} | ${BRAND.locationShort}`,

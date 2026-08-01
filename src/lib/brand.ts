@@ -10,7 +10,7 @@ export const BRAND = {
   phoneTel: "+17325976659",
   email: "hello@jlucalandscaping.com",
   siteUrl: "https://john-johns-landscaping.vercel.app",
+  /** Tight-cropped transparent logo (design only) */
   logoPath: "/logo.png",
-  logoEmailPath: "/logo-email.jpg",
-  logoLightPath: "/logo-light.jpg",
+  logoEmailPath: "/logo-email.png",
 } as const;
